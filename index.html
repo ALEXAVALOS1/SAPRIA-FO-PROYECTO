@@ -1,1 +1,113 @@
-<h1>Github pages test</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SINAPRIA-FO Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#064e3b", // Deep Forest Green/Emerald
+                        secondary: "#D4C19C", // Gold accent
+                        "brand-green": "#10B981", // Emerald Green
+                        "brand-dark-green": "#065f46", // Darker emerald for contrast
+                        "background-light": "#F8F9FA",
+                        "background-dark": "#121212",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1E1E1E",
+                        "alert-red": "#E63946",
+                        "alert-yellow": "#FFB703",
+                        "alert-orange": "#f97316",
+                        "success-green": "#10B981", 
+                        "info-blue": "#457B9D"
+                    },
+                    fontFamily: {
+                        display: ["Montserrat", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': "1rem",
+                        '2xl': "1.5rem"
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        .map-container {
+            background-color: #e5e7eb;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+                repeating-linear-gradient(0deg, transparent, transparent 19px, #d1d5db 20px),
+                repeating-linear-gradient(90deg, transparent, transparent 19px, #d1d5db 20px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .map-street {
+            position: absolute;
+            background-color: #9ca3af;
+            transform-origin: center;
+        }
+        .map-river {
+            position: absolute;
+            background-color: #93c5fd;
+            border-radius: 10px;
+        }
+        .dark .map-container {
+            filter: invert(0.9) hue-rotate(180deg) brightness(0.8) contrast(1.2);
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.5);
+            cursor: pointer;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-relief {
+            filter: drop-shadow(1px 1px 0px rgba(255,255,255,0.2)) drop-shadow(-1px -1px 1px rgba(0,0,0,0.4)) drop-shadow(0 0 4px currentColor);
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-100 transition-colors duration-200">
+    <div id="root"></div>
+</body>
+</html>
