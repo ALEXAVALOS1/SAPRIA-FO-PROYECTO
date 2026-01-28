@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4 bg-white/5 p-6 rounded-lg border border-white/10">
             <img 
-              alt="Gobierno de Juárez" 
+              alt="Gobierno Municipal de Juárez" 
               className="h-16 w-auto filter invert brightness-0 opacity-80" 
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEG7L3RZabm-gyIGMhAD_6u9GToBw0lm3zo4G-HK3qxvNdE58Y59KV9QiGH8hQduA7q0FSp0nxWs5XLJXzdfc-f7U2_R3ko-Cfr_GOiIQ--3swubxf8_bmnuECooyo5cRGJJQpAg7e0DrSpSeTcc8bQpPG3PKwMLDOuzRQCQAf7N2Xabw10QGzHKVFSv9BP8FX0VyimpyzhkmeAjdMRbRzxqEkiBf-g_bfgTgOt3fUgfp0kUilJucmrGrQtNGza8aUGgGl7cCXs84" 
             />

@@ -6,10 +6,10 @@ export const Navigation: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center space-x-6 text-white/90 text-sm font-medium overflow-x-auto no-scrollbar">
-            <a className="text-white border-b-2 border-secondary pb-4 pt-4 whitespace-nowrap" href="#">Dashboard Principal</a>
-            <a className="hover:text-white pb-4 pt-4 transition-colors whitespace-nowrap" href="#">Reportes Históricos</a>
-            <a className="hover:text-white pb-4 pt-4 transition-colors whitespace-nowrap" href="#">Alertas Activas</a>
-            <a className="hover:text-white pb-4 pt-4 transition-colors whitespace-nowrap" href="#">Recursos y Ayuda</a>
+            <button type="button" className="text-white border-b-2 border-secondary pb-4 pt-4 whitespace-nowrap bg-transparent cursor-pointer">Dashboard Principal</button>
+            <button type="button" className="hover:text-white pb-4 pt-4 transition-colors whitespace-nowrap bg-transparent cursor-pointer">Reportes Históricos</button>
+            <button type="button" className="hover:text-white pb-4 pt-4 transition-colors whitespace-nowrap bg-transparent cursor-pointer">Alertas Activas</button>
+            <button type="button" className="hover:text-white pb-4 pt-4 transition-colors whitespace-nowrap bg-transparent cursor-pointer">Recursos y Ayuda</button>
           </div>
           <div className="hidden lg:flex items-center gap-3">
             <button className="bg-brand-green hover:bg-brand-dark-green text-white px-4 py-2 rounded text-xs font-bold flex items-center gap-2 shadow-md transition-all transform hover:scale-105 border border-white/10">

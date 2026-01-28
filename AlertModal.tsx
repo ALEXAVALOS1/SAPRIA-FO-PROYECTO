@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ToastNotification } from './ToastNotification';
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -7,18 +8,46 @@ interface AlertModalProps {
 
 export const AlertModal: React.FC<AlertModalProps> = ({ isOpen, onClose }) => {
   const [showToast, setShowToast] = useState(false);
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => { isMounted.current = false; };
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   const handleCopyLink = () => {
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 2000);
+    const alertLink = window.location.href;
+    const alertText = `¡Alerta Crítica Detectada en Riberas Del Bravo! Más información en: ${alertLink}`;
+    
+    if (!navigator.clipboard) {
+      console.warn('API de portapapeles no disponible (requiere contexto seguro/HTTPS)');
+      return;
+    }
+
+    navigator.clipboard.writeText(alertText).then(() => {
+      if (isMounted.current) {
+        setShowToast(true);
+      }
+    }).catch(err => {
+      console.error('Error al copiar el enlace:', err);
+      // En una app real, podríamos mostrar un toast de error aquí.
+    });
   };
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onClick={onClose}></div>
-      <div className="relative bg-white dark:bg-card-dark rounded-2xl shadow-2xl max-w-lg w-full transform transition-all scale-100 border border-gray-200 dark:border-gray-700 overflow-hidden animate-fade-in-up">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onClick={onClose} aria-hidden="true" data-testid="modal-backdrop"></div>
+      <div role="dialog" aria-modal="true" aria-labelledby="modal-title" className="relative bg-white dark:bg-card-dark rounded-2xl shadow-2xl max-w-lg w-full transform transition-all scale-100 border border-gray-200 dark:border-gray-700 overflow-hidden animate-fade-in-up">
         
         {/* Header */}
         <div className="bg-red-50 dark:bg-red-900/10 p-5 flex items-center gap-4 border-b border-red-100 dark:border-red-900/30">
@@ -26,7 +55,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({ isOpen, onClose }) => {
             <span className="material-icons-outlined text-2xl">warning</span>
           </div>
           <div>
-            <h2 className="text-lg md:text-xl font-bold text-alert-red uppercase leading-tight tracking-tight">¡ALERTA CRÍTICA DETECTADA!</h2>
+            <h2 id="modal-title" className="text-lg md:text-xl font-bold text-alert-red uppercase leading-tight tracking-tight">¡ALERTA CRÍTICA DETECTADA!</h2>
           </div>
         </div>
 
@@ -79,9 +108,12 @@ export const AlertModal: React.FC<AlertModalProps> = ({ isOpen, onClose }) => {
               >
                 <span className="material-icons-outlined text-lg">link</span>
                 Enlace
-                {showToast && (
-                    <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded">Copiado</div>
-                )}
+                <ToastNotification 
+                  message="Copiado" 
+                  isVisible={showToast} 
+                  onClose={() => setShowToast(false)}
+                  className="-top-10 left-1/2 transform -translate-x-1/2"
+                />
               </button>
             </div>
           </div>
